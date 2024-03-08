@@ -6,7 +6,7 @@ import jwt from 'npm:jsonwebtoken';
 import usersModel from "../models/usersModle.js";
 import tokenModel from '../models/tokenModel.js';
 
-const env = await load();
+const env = await load({ export: true });
 
 export async function login(req, res) {
     /* 	

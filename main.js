@@ -7,7 +7,7 @@ import morgan from 'npm:morgan';
 
 import { load } from "@std/dotenv";
 
-const env = await load();
+const env = await load({ export: true });
 
 const PORT = env.PORT; // Deno.env.get('PORT');
 
