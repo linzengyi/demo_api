@@ -7,9 +7,9 @@ import morgan from 'npm:morgan';
 
 import { load } from "@std/dotenv";
 
-await load({ export: true });
+const env = await load();
 
-const PORT = Deno.env.get('PORT');
+const PORT = env.PORT; // Deno.env.get('PORT');
 
 const con = await db.connect()
 con.ready(() => {

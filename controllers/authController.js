@@ -1,10 +1,12 @@
 // import bcrypt from 'bcrypt';
 import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
+import { load } from "@std/dotenv";
 import jwt from 'npm:jsonwebtoken';
 
 import usersModel from "../models/usersModle.js";
 import tokenModel from '../models/tokenModel.js';
 
+const env = await load();
 
 export async function login(req, res) {
     /* 	
@@ -67,7 +69,7 @@ export async function login(req, res) {
     const token = await jwt.sign({ 
         _id: userData._id,
         name: userData.name,
-        photo: userData.photo || '' }, Deno.env.get("KEY"));
+        photo: userData.photo || '' }, env.KEY); //Deno.env.get("KEY"));
 
     /* 
         token寫入資料庫
