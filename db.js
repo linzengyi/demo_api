@@ -3,10 +3,10 @@ import mongoose from 'npm:mongoose';
 
 import { load } from "@std/dotenv";
 
-const env = await load({ export: true });
-console.log(env.MONGODB_URI);
-// const uri = Deno.env.get("MONGODB_URI") || 'mongodb://127.0.0.1:27017/demo';
-const uri = env.MONGODB_URI || 'mongodb://127.0.0.1:27017/demo';
+await load({ export: true });
+
+const uri = Deno.env.get("MONGODB_URI") || 'mongodb://127.0.0.1:27017/demo';
+// const uri = env.MONGODB_URI || 'mongodb://127.0.0.1:27017/demo';
 
 const Connect = {
     ready(handler) {
