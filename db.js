@@ -1,12 +1,6 @@
 // import 'dotenv/config';
 import mongoose from 'npm:mongoose';
-
-import { load } from "@std/dotenv";
-
-await load({ export: true });
-
-const uri = Deno.env.get("MONGODB_URI") || 'mongodb://127.0.0.1:27017/demo';
-// const uri = env.MONGODB_URI || 'mongodb://127.0.0.1:27017/demo';
+import { loadSync } from "@std/dotenv";
 
 const Connect = {
     ready(handler) {
@@ -16,13 +10,17 @@ const Connect = {
 
 async function connect() {
     try {
-        await mongoose.connect(uri);
-        // .catch((err) => {
-        //     console.log('錯誤訊息:', err.message);
-        //     process.exit(0);
-        // });
+        const env = loadSync({ export: true });
 
-        return Promise.resolve(Connect);
+        const uri = env.MONGODB_URI || Deno.env.get("MONGODB_URI") || 'mongodb://127.0.0.1:27017/demo';
+
+        await mongoose.connect(uri);
+        
+        if (mongoose.connection.readyState === 1) {
+            console.log('is connect.');
+        }
+
+        return Connect;//Promise.resolve(Connect);
     } catch(err) {
         console.log('錯誤訊息:', err.message);
         process.exit(0);
