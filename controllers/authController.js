@@ -1,5 +1,5 @@
-// import bcrypt from 'bcrypt';
-import * as bcrypt from "https://deno.land/x/bcrypt/mod.ts";
+// import bcrypt from 'bcrypt'; // nodejs語法
+import { verify } from "jsr:@denorg/scrypt@4.3.4";
 import { loadSync } from "@std/dotenv";
 import jwt from 'npm:jsonwebtoken';
 
@@ -62,12 +62,12 @@ export async function login(req, res) {
         return res.status(400).json({ success: false, msg: '帳號不存在!' });
     }
 
-    const result = await bcrypt.compare(password, userData.password);
+    // const result = await bcrypt.compare(password, userData.password); // nodejs語法
+    const result = verify(password, userData.password); // deno語法
 
     if (!result) {
         return res.status(400).json({ success: false, msg: '密碼錯誤!' });
     }
-
 
     const token = await jwt.sign({ 
         _id: userData._id,
@@ -134,7 +134,6 @@ export async function logout(req, res) {
             }
         }
     */
-
     res.send({ success: true, msg: '已登出' });
 }
 

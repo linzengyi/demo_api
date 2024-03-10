@@ -9,7 +9,7 @@ const rootRouter = Router();
 rootRouter
     .use('/version', (req, res) => {
         res.status(200).json({
-            version: '0.2.0'
+            version: '0.2.2'
         });
     })
     .use(authRouter)
