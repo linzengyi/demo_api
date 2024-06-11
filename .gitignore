@@ -130,7 +130,5 @@ dist
 .yarn/install-state.gz
 .pnp.*
 
-# docker postgreSQL資料庫
-database/data/*
-
-tempfile
+# docker mongodb資料庫
+database/*

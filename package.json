@@ -5,13 +5,13 @@
   "main": "main.js",
   "type": "module",
   "scripts": {
-    "dev": "dotenvx run --env-file=.env.devloper -- nodemon main.js",
-    "dev2": "node --env-file=.env.devloper --watch main.js",
-    "start": "dotenvx run --env-file=.env node main.js"
+    "dev": "dotenvx run --env-file=.env.devloper -- nodemon -L main.js",
+    "start": "dotenvx run --env-file=.env node main.js",
+    "swagger": "node ./swagger.js"
   },
   "dependencies": {
     "@dotenvx/dotenvx": "^0.44.1",
-    "bcrypt": "^5.1.1",
+    "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",

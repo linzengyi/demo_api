@@ -4,6 +4,8 @@ import routers from './routers/routers.js';
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
+import { loadJsonFileSync } from 'load-json-file';
+import swaggerUi from 'swagger-ui-express';
 
 (async () => {
     const PORT = process.env.PORT || 3000;
@@ -21,6 +23,11 @@ import morgan from 'morgan';
 
         app.use('/api', routers);
 
+        if (process.env.MODE && process.env.MODE === 'devloper') {
+            const swaggerDocument = loadJsonFileSync('swagger-output.json');
+            app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
+        }
+        
         app.use((err, req, res, next) => {
             err.statusCode = err.statusCode || 500;
             err.message = err.message || 'Internal Server Error';

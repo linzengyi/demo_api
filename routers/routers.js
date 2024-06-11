@@ -2,6 +2,7 @@ import { Router } from 'express';
 import todoRouter from './todoRouter.js';
 import accountsRouter from './accountsRouter.js';
 import authRouter from './authRouter.js';
+import userRouter from './usersRouter.js';
 
 
 const rootRouter = Router();
@@ -12,10 +13,9 @@ rootRouter
             version: '0.2.2'
         });
     })
+    .use(userRouter)
     .use(authRouter)
     .use(todoRouter)
-    .use(
-        // #swagger.deprecated = true
-        accountsRouter);
+    .use(accountsRouter);
 
 export default rootRouter;

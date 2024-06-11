@@ -1,0 +1,865 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "0.2.2",
+    "title": "範例應用API",
+    "description": "範例應用功能API"
+  },
+  "host": "localhost:3000",
+  "basePath": "/api/",
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/user/profile": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "取得帳號資料",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "User"
+        ],
+        "description": "更新帳號資料",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "photo": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/user/signup": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "建立帳號資料",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "example": "any"
+                },
+                "password": {
+                  "example": "any"
+                },
+                "name": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/user/signup/accountcheck": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "帳號存在檢核",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "account": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth-授權"
+        ],
+        "description": "帳號登入",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "登入資料",
+            "schema": {
+              "required": [
+                "account",
+                "password",
+                "identity"
+              ],
+              "properties": {
+                "account": {
+                  "type": "string",
+                  "description": "帳號(email)",
+                  "example": "demo@gmail.com"
+                },
+                "password": {
+                  "type": "string",
+                  "description": "登入密碼",
+                  "example": "123456"
+                },
+                "identity": {
+                  "type": "string",
+                  "description": "登入角色",
+                  "example": "devloper"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "token": {
+                  "type": "string",
+                  "example": "__qqfdfdfsdfsgd....."
+                },
+                "identity": {
+                  "type": "string",
+                  "example": "devloper"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "錯誤",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤內容"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/logout": {
+      "get": {
+        "tags": [
+          "Auth-授權"
+        ],
+        "description": "帳號登出(方式1)",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "msg": {
+                  "type": "string",
+                  "example": "已登出"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "__qqfdfdfsdfsgd....."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": []
+      },
+      "delete": {
+        "tags": [
+          "Auth-授權"
+        ],
+        "description": "帳號登出(方式2)",
+        "parameters": [
+          {
+            "name": "authorization",
+            "in": "header",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "msg": {
+                  "type": "string",
+                  "example": "已登出"
+                },
+                "token": {
+                  "type": "string",
+                  "example": "__qqfdfdfsdfsgd....."
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        },
+        "security": []
+      }
+    },
+    "/todos": {
+      "post": {
+        "tags": [
+          "Todo-待辦事項"
+        ],
+        "description": "新增待辦事項",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Todo新增資料.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/todoCreateData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "data": {
+                  "$ref": "#/definitions/todoData"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "錯誤",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤內容"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Todo-待辦事項"
+        ],
+        "description": "取得待辦事項清單",
+        "parameters": [
+          {
+            "name": "done",
+            "in": "query",
+            "type": "number",
+            "description": "取得完成狀態紀錄，值: 0未完成 1已完成"
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "type": "number",
+            "description": "指定第x頁"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "number",
+            "description": "指定每頁顯示筆數"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "docs": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "properties": {
+                      "_id": {
+                        "type": "string",
+                        "example": "65c5e78e1773050c199ac11c"
+                      },
+                      "title": {
+                        "type": "string",
+                        "example": "待辦事項內容"
+                      },
+                      "memo": {
+                        "type": "string",
+                        "example": "待辦事項備註"
+                      },
+                      "done": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "isDelete": {
+                        "type": "boolean",
+                        "example": false
+                      },
+                      "createdAt": {
+                        "type": "string",
+                        "example": "2024-02-09T08:51:26.444Z"
+                      },
+                      "updatedAt": {
+                        "type": "string",
+                        "example": "2024-02-27T11:25:14.797Z"
+                      }
+                    }
+                  }
+                },
+                "totalDocs": {
+                  "type": "number",
+                  "example": 4
+                },
+                "limit": {
+                  "type": "number",
+                  "example": 6
+                },
+                "totalPages": {
+                  "type": "number",
+                  "example": 1
+                },
+                "page": {
+                  "type": "number",
+                  "example": 1
+                },
+                "pagingCounter": {
+                  "type": "number",
+                  "example": 1
+                },
+                "hasPrevPage": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "hasNextPage": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "prevPage": {},
+                "nextPage": {}
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "錯誤",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤內容"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/todos/{id}": {
+      "put": {
+        "tags": [
+          "Todo-待辦事項"
+        ],
+        "description": "修改待辦事項",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "需修改待辦事項的_id值"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "需修改欄位資料",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "type": "string",
+                  "example": ""
+                },
+                "memo": {
+                  "type": "string",
+                  "example": ""
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功"
+          },
+          "400": {
+            "description": "錯誤",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤內容"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Todo-待辦事項"
+        ],
+        "description": "刪除待辦事項",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "需刪除待辦事項_id值"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "msg": {
+                  "type": "string",
+                  "example": "已刪除成功!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "錯誤",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤內容"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/todos/{id}/state": {
+      "put": {
+        "tags": [
+          "Todo-待辦事項"
+        ],
+        "description": "待辦done狀態更新",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "需更新待辦done狀態紀錄_id值"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "updateDoneState": {
+                  "type": "boolean",
+                  "example": true
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "成功",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "message": {
+                  "type": "string",
+                  "example": "狀態已更新成功!"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          },
+          "400": {
+            "description": "錯誤",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "錯誤內容"
+                }
+              },
+              "xml": {
+                "name": "main"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/accounts": {
+      "get": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "取得記帳本列表資料",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "type": "string"
+          },
+          {
+            "name": "date",
+            "in": "query",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "建立記帳本資料",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "incomeAndExpenditureDate": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "amount": {
+                  "example": "any"
+                },
+                "memo": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    },
+    "/accounts/{id}": {
+      "put": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "更新記帳本資料",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "title": {
+                  "example": "any"
+                },
+                "incomeAndExpenditureDate": {
+                  "example": "any"
+                },
+                "type": {
+                  "example": "any"
+                },
+                "amount": {
+                  "example": "any"
+                },
+                "memo": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Accounts"
+        ],
+        "description": "刪除記帳本資料",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "todoCreateData": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "example": "待辦事項"
+        },
+        "memo": {
+          "type": "string",
+          "example": "待辦備註"
+        }
+      },
+      "required": [
+        "title"
+      ]
+    },
+    "todoData": {
+      "type": "object",
+      "properties": {
+        "_id": {
+          "type": "string",
+          "example": "65c5e78e1773050c199ac11c"
+        },
+        "title": {
+          "type": "string",
+          "example": "待辦事項"
+        },
+        "memo": {
+          "type": "string",
+          "example": "待辦備註"
+        },
+        "done": {
+          "type": "boolean",
+          "example": false
+        },
+        "isDelete": {
+          "type": "boolean",
+          "example": false
+        },
+        "createdAt": {
+          "type": "string",
+          "example": "2024-02-09T08:51:26.444Z"
+        },
+        "updatedAt": {
+          "type": "string",
+          "example": "2024-02-27T11:25:14.797Z"
+        }
+      }
+    }
+  }
+}

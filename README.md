@@ -1,23 +1,28 @@
 # 範例應用API
 說明: 提供 待辦事項、記帳本 簡易CRUD功能API
 
-## 待辦事項
-1.新增待辦事項 POST /api/todos
+## 專案運行說明
+1.於專案根目錄下新增.env.devloper檔，新增以下參數:
+````
+    # 開發參數
+    MODE=devloper
 
-2.取得待辦清單 GET /api/todos
+    # databae
+    MONGODB_URI=mongodb://mongodb:27017/<自訂資料表名稱>
 
-3.修改待辦事項 PUT /api/todos/:id
+    #app
+    PORT=3000
 
-4.待辦狀態更新 PUT /api/todos/:id/state
+    #密碼hash key
+    KEY=<自訂key值>
+````
+2.執行命令
+````
+    docker-compose up
+````
 
-5.刪除待辦事項 DELETE /api/todos/:id
-
-
-## 記帳本
-1.新增記帳項目 POST /api/accounts
-
-2.取得記帳清單 GET /api/accounts
-
-3.修改記帳內容 PUT /api/accounts/:id
-
-4.刪除記帳內容 DELETE /api/accounts/:id
+## API 文件
+文件網址
+````
+url: http://<主機名稱>:<PORT號>/docs
+例: http://localhost:3000/docs
