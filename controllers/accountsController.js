@@ -1,5 +1,5 @@
 import accountsModel from '../models/accountsModel.js';
-import { toDate, format } from 'npm:date-fns';
+import { toDate, format } from 'date-fns';
 
 
 

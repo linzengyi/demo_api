@@ -1,5 +1,5 @@
-import mongoose from 'npm:mongoose';
-import mongoosePaginate from 'npm:mongoose-paginate-v2';
+import mongoose from 'mongoose';
+import mongoosePaginate from 'mongoose-paginate-v2';
 
 const accountsSchema = mongoose.Schema({
     title: {

@@ -1,4 +1,4 @@
-import mongoose from 'npm:mongoose';
+import mongoose from 'mongoose';
 
 
 const tokenSchema = mongoose.Schema({

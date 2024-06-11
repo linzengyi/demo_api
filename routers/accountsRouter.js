@@ -1,4 +1,4 @@
-import { Router } from "npm:express";
+import { Router } from "express";
 import * as accounts from '../controllers/accountsController.js';
 
 

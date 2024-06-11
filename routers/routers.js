@@ -1,4 +1,4 @@
-import { Router } from 'npm:express';
+import { Router } from 'express';
 import todoRouter from './todoRouter.js';
 import accountsRouter from './accountsRouter.js';
 import authRouter from './authRouter.js';

@@ -1,16 +1,12 @@
-// import 'dotenv/config';
+import 'dotenv/config';
 import * as db from './db.js';
 import routers from './routers/routers.js';
-import express from 'npm:express';
-import cors from 'npm:cors';
-import morgan from 'npm:morgan';
-
-import { loadSync } from "@std/dotenv";
+import express from 'express';
+import cors from 'cors';
+import morgan from 'morgan';
 
 (async () => {
-    const env = loadSync({ export: true });
-
-    const PORT = env.PORT || Deno.env.get('PORT');
+    const PORT = process.env.PORT || 3000;
  
     const con = await db.connect();
     

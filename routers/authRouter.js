@@ -1,4 +1,4 @@
-import { Router } from "npm:express";
+import { Router } from "express";
 import { login, logout } from '../controllers/authController.js';
 
 

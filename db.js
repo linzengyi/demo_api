@@ -1,6 +1,6 @@
-// import 'dotenv/config';
-import mongoose from 'npm:mongoose';
-import { loadSync } from "@std/dotenv";
+import 'dotenv/config';
+import mongoose from 'mongoose';
+
 
 const Connect = {
     ready(handler) {
@@ -10,9 +10,7 @@ const Connect = {
 
 async function connect() {
     try {
-        const env = loadSync({ export: true });
-
-        const uri = env.MONGODB_URI || Deno.env.get("MONGODB_URI") || 'mongodb://127.0.0.1:27017/demo';
+        const uri = process.env.MONGODB_URI ||  'mongodb://127.0.0.1:27017/demo';
 
         await mongoose.connect(uri);
         
